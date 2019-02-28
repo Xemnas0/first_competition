@@ -4,8 +4,6 @@ import java.util.Arrays;
 import java.util.Hashtable;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
 
 public class Solver {
 
@@ -13,6 +11,7 @@ public class Solver {
     Photo[] photos;
     Hashtable<String, Integer> categories = new Hashtable<>();
     Hashtable<Integer, List<Photo>> grouped_photos_by_tag = new Hashtable<>();
+    Slide[] slideshow;
 
     public Solver(String filepath) {
         try (BufferedReader br = new BufferedReader(new FileReader(filepath))) {
@@ -34,6 +33,8 @@ public class Solver {
         } catch (Exception e) {
             System.err.println("Error reading the file " + filepath);
         }
+        int size_slideshow =  (int) ( countV() / 2 + countH());
+        slideshow = new Slide[size_slideshow];
     }
 
     public long countV(){
