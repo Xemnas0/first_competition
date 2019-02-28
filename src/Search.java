@@ -5,18 +5,14 @@ public class Search {
 
     int MAX_DEEP = 1;
 
-
-    Slide[] slideshow = new Slide[];
-
-    int next_slide(HashMap<Integer, HashMap<Integer, Integer>> transitions,
-                                                     int current_picture, Photo[] list_photo, int pos_slideshow){
+    static int next_slide(HashMap<Integer, HashMap<Integer, Integer>> transitions,
+                                                     int current_picture, HashMap<Integer, Photo> list_photo){
             HashMap<Integer, Integer> next_pictures = transitions.get(current_picture);
-            HashMap<Double, ArrayList<Photo>> path = new HashMap<>();
             int max_score = 0;
             int max_pic = 0;
-            Photo current_photo = list_photo[current_picture];
+            Photo current_photo = list_photo.get(current_picture);
             for(Integer picture: next_pictures.keySet()){
-                Photo next_photo = list_photo[picture];
+                Photo next_photo = list_photo.get(picture);
                 if (current_photo.isHorizontal){
                     System.err.println("no need for new picture in this slide");
                     continue;
