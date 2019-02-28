@@ -27,6 +27,7 @@ public class Solver {
                 List<Photo> photo_by_tag = grouped_photos_by_tag.get(photos[i].tags.length);
                 if (photo_by_tag == null) {
                     photo_by_tag = new LinkedList<>();
+                    grouped_photos_by_tag.put(photos[i].tags.length, photo_by_tag);
                 }
                 photo_by_tag.add(photos[i]);
             }
