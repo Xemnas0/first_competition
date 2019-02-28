@@ -5,10 +5,12 @@ import java.util.TreeSet;
 
 public class Photo {
 
+    int id;
     boolean isHorizontal;
     TreeSet<Integer> tags;
 
-    public Photo(String info, Hashtable<String, Integer> categories) {
+    public Photo(int id, String info, Hashtable<String, Integer> categories) {
+        this.id = id;
         String[] splitted_infos = info.split(" ");
 
         if (splitted_infos[0].compareTo("H") == 0){
