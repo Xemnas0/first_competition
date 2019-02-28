@@ -44,7 +44,6 @@ public class Solver {
         for (Photo p1 : photos){
             for (Photo p2 : photos) {
                 if (!p1.isHorizontal && !p2.isHorizontal) {
-                    Photo[] u = {p1, p2};
                     Slide s = new Slide(p1, p2);
                     res.add(s);
                 }
