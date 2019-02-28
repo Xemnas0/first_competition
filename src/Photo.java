@@ -1,12 +1,14 @@
+import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.LinkedList;
+import java.util.TreeSet;
 
 public class Photo {
 
     boolean isHorizontal;
-    int[] tags;
+    TreeSet<Integer> tags;
 
-    public Photo(String info, LinkedList<String> categories, Hashtable<String, Boolean> inserted_categories) {
+    public Photo(String info, Hashtable<String, Integer> categories) {
         String[] splitted_infos = info.split(" ");
 
         if (splitted_infos[0].compareTo("H") == 0){
@@ -15,17 +17,21 @@ public class Photo {
             isHorizontal = false;
         }
 
-        int n_tags = Integer.valueOf(splitted_infos[1]);
-        tags = new int[n_tags];
+        tags = new TreeSet<>();
 
         Integer tag;
         for (int i = 2; i < splitted_infos.length; i++) {
-//            inserted_categories.get(splitted_infos[i]);
-//            if (){
-
+            tag = categories.get(splitted_infos[i]);
+            if (tag != null){
+                tags.add(tag);
                 continue;
-//            }
+            }
+            // If it's a new class, add it to the hashtable
+            tag = categories.size();
+            categories.put(splitted_infos[i], tag);
+            tags.add(tag);
 
         }
     }
+
 }
