@@ -2,8 +2,8 @@ import java.util.Arrays;
 
 public class Score {
     public int score(Slide s1, Slide s2) {
-        int[] tags_p1 = s1.tags;
-        int[] tags_p2 = s2.tags;
+        Integer[] tags_p1 = s1.tags;
+        Integer[] tags_p2 = s2.tags;
 //        int common_tags = 0;
 //        int tags_in_p1_not_in_p2 = 0;
 //        int tags_in_p2_not_in_p1 = 0;
