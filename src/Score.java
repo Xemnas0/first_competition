@@ -38,12 +38,15 @@ public class Score {
         return scores[0];
     }
 
-    static public HashMap<Integer, HashMap<Integer, Integer>> score_non_decreasing(Photo[] input_photos) {
+    static public HashMap<Integer, HashMap<Integer, Integer>> score_all_with_all(Photo[] input_photos) {
         HashMap<Integer, HashMap<Integer, Integer>> res = new HashMap<>();
         Integer scr;
         for (Photo p1: input_photos) {
 //            System.out.printf("%d\n", p1.id);
             for (Photo p2: input_photos) {
+                if (p1.id == p2.id) {
+                    continue;
+                }
                 if (res.get(p2.id) != null && (scr = res.get(p2.id).get(p1.id)) != null) {
                     res.putIfAbsent(p1.id, new HashMap<>());
                     res.get(p1.id).put(p2.id, scr);
@@ -56,6 +59,16 @@ public class Score {
                     res.get(p1.id).put(p2.id, scr);
                 }
             }
+        }
+        return res;
+    }
+
+    HashMap<Integer, Integer> score_this_with_rest(Photo current_photo, Photo[] rest) {
+        Slide s1 = new Slide(current_photo, null);
+        HashMap<Integer, Integer> res = new HashMap<>();
+        for (Photo p: rest) {
+            Slide s2 = new Slide(p, null);
+            res.put(p.id, Score.score(s1, s2));
         }
         return res;
     }
