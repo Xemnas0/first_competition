@@ -5,16 +5,17 @@ public class Slide {
     Integer[] tags;
     Photo[] photos;
 
-    public Slide(Photo[] p1, Photo[] p2) {
+    public Slide(Photo p1, Photo p2) {
         ArrayList<Photo> photo_res = new ArrayList<>();
         TreeSet<Integer> tags_res = new TreeSet<>();
-        for (Photo p : p1) {
-            photo_res.add(p);
-            tags_res.addAll(p.tags);
-        }
-        for (Photo p : p2) {
-            photo_res.add(p);
-            tags_res.addAll(p.tags);
+        photo_res.add(p1);
+        tags_res.addAll(p1.tags);
+        if (p2 != null) {
+            if (p1.isHorizontal || p2.isHorizontal) {
+                throw new IllegalArgumentException("Both photos have to be vertical!");
+            }
+            photo_res.add(p2);
+            tags_res.addAll(p2.tags);
         }
         photos = photo_res.toArray(new Photo[0]);
         tags = tags_res.toArray(new Integer[0]);

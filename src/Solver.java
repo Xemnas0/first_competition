@@ -39,16 +39,17 @@ public class Solver {
     }
 
 
-    public Photo[][] merge_verticals() {
-        ArrayList<Photo []> res = new ArrayList<>();
+    public Slide[] merge_verticals() {
+        ArrayList<Slide> res = new ArrayList<>();
         for (Photo p1 : photos){
             for (Photo p2 : photos) {
                 if (!p1.isHorizontal && !p2.isHorizontal) {
                     Photo[] u = {p1, p2};
-                    res.add(u);
+                    Slide s = new Slide(p1, p2);
+                    res.add(s);
                 }
             }
         }
-        return res.toArray(new Photo[0][0]);
+        return res.toArray(new Slide[0]);
     }
 }
