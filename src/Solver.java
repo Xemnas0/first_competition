@@ -1,8 +1,9 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.Arrays;
-import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
@@ -11,6 +12,7 @@ public class Solver {
     int n_photos;
     Photo[] photos;
     Hashtable<String, Integer> categories = new Hashtable<>();
+    Hashtable<Integer, List<Photo>> grouped_photos_by_tag = new Hashtable<>();
 
     public Solver(String filepath) {
         try (BufferedReader br = new BufferedReader(new FileReader(filepath))) {
@@ -22,6 +24,11 @@ public class Solver {
             for (int i = 0; i < n_photos; ++i) {
                 line = br.readLine();
                 photos[i] = new Photo(i, line, categories);
+                List<Photo> photo_by_tag = grouped_photos_by_tag.get(photos[i].tags.length);
+                if (photo_by_tag == null) {
+                    photo_by_tag = new LinkedList<>();
+                }
+                photo_by_tag.add(photos[i]);
             }
         } catch (Exception e) {
             System.err.println("Error reading the file " + filepath);
@@ -38,17 +45,4 @@ public class Solver {
         return categories.size();
     }
 
-
-    public Slide[] merge_verticals() {
-        ArrayList<Slide> res = new ArrayList<>();
-        for (Photo p1 : photos){
-            for (Photo p2 : photos) {
-                if (!p1.isHorizontal && !p2.isHorizontal) {
-                    Slide s = new Slide(p1, p2);
-                    res.add(s);
-                }
-            }
-        }
-        return res.toArray(new Slide[0]);
-    }
 }
