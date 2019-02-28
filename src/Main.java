@@ -8,7 +8,9 @@ public class Main {
             "./d_pet_pictures.txt",
             "./e_shiny_selfies.txt"
         };
-        Solver solver = new Solver(input_filename[0]);
-
+        Solver solver = new Solver(input_filename[4]);
+        System.out.println(solver.countH());
+        System.out.println(solver.countV());
+        System.out.println(solver.countTags());
     }
 }
